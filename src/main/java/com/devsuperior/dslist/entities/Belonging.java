@@ -1,36 +1,44 @@
 package com.devsuperior.dslist.entities;
 
+import com.devsuperior.dslist.entities.BelongingPK;
+import com.devsuperior.dslist.entities.Game;
+import com.devsuperior.dslist.entities.GameList;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.Objects;
 
+
+import java.util.Objects;
+
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "tb_belonging")
 public class Belonging {
+
     @EmbeddedId
     private BelongingPK id = new BelongingPK();
 
     private Integer position;
 
-    public Belonging() {
-
-    }
-    public Belonging(Game game, GameList list, Integer position) {
-        this.id.setGame(game);
-        this.id.setList(list);
-        this.position = position;
-
+    public void setGame(Game game) {
+        id.setGame(game);
     }
 
-    public BelongingPK getId() {
-        return id;
+    public Game getGame() {
+        return id.getGame();
     }
 
-    public void setId(BelongingPK id) {
-        this.id = id;
+    public void setList(GameList list) {
+        id.setList(list);
+    }
+
+    public GameList getList() {
+        return id.getList();
     }
 
     public Integer getPosition() {
@@ -42,15 +50,19 @@ public class Belonging {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Belonging belonging = (Belonging) o;
-        return Objects.equals(id, belonging.id);
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Belonging other = (Belonging) obj;
+        return Objects.equals(id, other.id);
     }
 }
