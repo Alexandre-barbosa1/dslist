@@ -18,11 +18,18 @@ import java.util.List;
 @RequestMapping(value = "/lists")
 public class GameListController {
     @Autowired
-    private GameListService gameService;
+    private GameListService gameListService;
+    @Autowired
+    private GameService gameService;
 
     @GetMapping
     public List<GameListDTO> findAll(){
-        List<GameListDTO> games = gameService.findAll();
+        List<GameListDTO> games = gameListService.findAll();
+        return games;
+    }
+    @GetMapping (value = "/{listId}/games")
+    public List<GameMinDTO> findByList(@PathVariable Long listId){
+        List<GameMinDTO> games = gameService.findByList(listId);
         return games;
     }
 
