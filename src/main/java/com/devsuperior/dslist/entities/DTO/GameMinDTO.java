@@ -28,7 +28,7 @@ public class GameMinDTO {
         this.imgUrl = projection.getImgUrl();
         this.shortDescription = projection.getShortDescription();
         this.title = projection.getTitle();
-        this.year = projection.getYear();
+        this.year = projection.getGameYear();
     }
 
     public Long getId() {
@@ -47,7 +47,7 @@ public class GameMinDTO {
         return title;
     }
 
-    public Integer getYear() {
+    public Integer getGameYear() {
         return year;
     }
 }
